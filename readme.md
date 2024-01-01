@@ -2,6 +2,9 @@
 
 A proof of concept importless way to modify Il2Cpp Unity games.
 
+[!WARNING]
+This code is bad and messy.
+
 ## How to get static addresses:
 
 ### S_domain:
