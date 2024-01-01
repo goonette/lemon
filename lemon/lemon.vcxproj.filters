@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="dllmain.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="general_deps.hpp" />
+    <ClInclude Include="il2cpp\il2cpp.hpp" />
+    <ClInclude Include="il2cpp\structs.hpp" />
+    <ClInclude Include="unity\unity.hpp" />
+    <ClInclude Include="magic_enum\magic_enum.hpp" />
+    <ClInclude Include="magic_enum\magic_enum_all.hpp" />
+    <ClInclude Include="magic_enum\magic_enum_containers.hpp" />
+    <ClInclude Include="magic_enum\magic_enum_flags.hpp" />
+    <ClInclude Include="magic_enum\magic_enum_format.hpp" />
+    <ClInclude Include="magic_enum\magic_enum_fuse.hpp" />
+    <ClInclude Include="magic_enum\magic_enum_iostream.hpp" />
+    <ClInclude Include="magic_enum\magic_enum_switch.hpp" />
+    <ClInclude Include="magic_enum\magic_enum_utility.hpp" />
+    <ClInclude Include="utils\utils.hpp" />
+  </ItemGroup>
+</Project>
