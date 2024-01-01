@@ -153,7 +153,7 @@ namespace il2cpp::structs {
 
         static Domain* get() {
             auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-            return *reinterpret_cast<Domain**>(module_base + 0x35D9F58);
+            return *reinterpret_cast<Domain**>(module_base + 0x35D9F58); // S_domain
         }
     };
 
@@ -479,7 +479,7 @@ namespace il2cpp::structs {
 
         Class* get_class_by_name(const std::string namespace_name, const std::string class_name) const {
             auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-            auto type_info_def_table = *reinterpret_cast<Class***>(module_base + 0x35D9F50);
+            auto type_info_def_table = *reinterpret_cast<Class***>(module_base + 0x35D9F50); // s_TypeInfoDefinitionTable
 
             for (auto i = 0u; i < this->typeCount; i++) {
                 auto type_def_idx = this->metadataHandle->typeStart + (int)i;
@@ -505,7 +505,7 @@ namespace il2cpp::structs {
 
         static Image* get_image_by_name(std::string name) {
             auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-            auto all_assemblies = reinterpret_cast<std::vector<Assembly*>*>(module_base + 0x35D9C70);
+            auto all_assemblies = reinterpret_cast<std::vector<Assembly*>*>(module_base + 0x35D9C70); // s_Assemblies
 
             for (auto i = 0; i < all_assemblies->size(); i++) {
                 auto assembly = all_assemblies->at(i);
@@ -579,7 +579,7 @@ namespace il2cpp::structs {
 
     class ComponentPairContainer {
     public:
-        ComponentPair arr[0x44];    // dynamic_array->m_capacity
+        ComponentPair arr[65565];    // dynamic_array->m_capacity
     };
 
     template<typename T>
