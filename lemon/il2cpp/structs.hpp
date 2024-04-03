@@ -153,7 +153,7 @@ namespace il2cpp::structs {
 
         static Domain* get() {
             auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-            return *reinterpret_cast<Domain**>(module_base + 0x35DE238);    // S_domain
+            return *reinterpret_cast<Domain**>(module_base + 0x3B83A88);    // S_domain
         }
     };
 
@@ -435,6 +435,8 @@ namespace il2cpp::structs {
                 }
             }
 
+            std::ranges::sort(ret, [](const FieldInfo& a, const FieldInfo& b) { return a.offset < b.offset; });
+
             return ret;
         }
 
@@ -498,7 +500,7 @@ namespace il2cpp::structs {
         Class* get_class_by_name(const std::string namespace_name, const std::string class_name) const {
             auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
             auto type_info_def_table =
-                *reinterpret_cast<Class***>(module_base + 0x35DE230);    // s_TypeInfoDefinitionTable
+                *reinterpret_cast<Class***>(module_base + 0x3B83AD8);    // s_TypeInfoDefinitionTable
 
             for (auto i = 0u; i < this->typeCount; i++) {
                 auto type_def_idx = this->metadataHandle->typeStart + (int)i;
@@ -524,7 +526,7 @@ namespace il2cpp::structs {
 
         static Image* get_image_by_name(std::string name) {
             auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-            auto all_assemblies = reinterpret_cast<std::vector<Assembly*>*>(module_base + 0x35DDF50);    // s_Assemblies
+            auto all_assemblies = reinterpret_cast<std::vector<Assembly*>*>(module_base + 0x3B837F8);    // s_Assemblies
 
             for (auto i = 0; i < all_assemblies->size(); i++) {
                 auto assembly = all_assemblies->at(i);

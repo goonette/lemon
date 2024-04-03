@@ -42,7 +42,7 @@ bool __stdcall DllMain(HINSTANCE dll, DWORD reason, void* reserved) {
                 }
 
                 printf(
-                    "size: %u, static fields size: %u, method count: %u, field count: %u\n",
+                    "size: %u, static fields size: %u, method count: %u, field count: %u\n\n",
                     base_player->klass->instance_size,
                     base_player->klass->static_fields_size,
                     base_player->klass->method_count,
