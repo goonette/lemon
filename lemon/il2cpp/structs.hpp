@@ -153,7 +153,7 @@ namespace il2cpp::structs {
 
         static Domain* get() {
             auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-            return *reinterpret_cast<Domain**>(module_base + 0x35D9F58); // S_domain
+            return *reinterpret_cast<Domain**>(module_base + 0x35DE238);    // S_domain
         }
     };
 
@@ -420,6 +420,24 @@ namespace il2cpp::structs {
             return {};
         }
 
+        std::vector<FieldInfo> get_fields() const {
+            std::vector<FieldInfo> ret{};
+
+            for (auto klass = this; klass; klass = klass->parent) {
+                auto arr = reinterpret_cast<FieldInfoArrayContainer*>(klass->fields);
+
+                for (auto i = 0u; i < klass->field_count; i++) {
+                    auto field = arr->arr[i];
+                    if (!field.token || field.token == -1)
+                        continue;
+
+                    ret.push_back(field);
+                }
+            }
+
+            return ret;
+        }
+
         const MethodInfo* get_method_from_name(const std::string name, std::int32_t parameter_count) const {
             for (auto klass = this; klass; klass = klass->parent) {
                 for (auto i = 0u; i < klass->method_count; i++) {
@@ -479,7 +497,8 @@ namespace il2cpp::structs {
 
         Class* get_class_by_name(const std::string namespace_name, const std::string class_name) const {
             auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-            auto type_info_def_table = *reinterpret_cast<Class***>(module_base + 0x35D9F50); // s_TypeInfoDefinitionTable
+            auto type_info_def_table =
+                *reinterpret_cast<Class***>(module_base + 0x35DE230);    // s_TypeInfoDefinitionTable
 
             for (auto i = 0u; i < this->typeCount; i++) {
                 auto type_def_idx = this->metadataHandle->typeStart + (int)i;
@@ -505,7 +524,7 @@ namespace il2cpp::structs {
 
         static Image* get_image_by_name(std::string name) {
             auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-            auto all_assemblies = reinterpret_cast<std::vector<Assembly*>*>(module_base + 0x35D9C70); // s_Assemblies
+            auto all_assemblies = reinterpret_cast<std::vector<Assembly*>*>(module_base + 0x35DDF50);    // s_Assemblies
 
             for (auto i = 0; i < all_assemblies->size(); i++) {
                 auto assembly = all_assemblies->at(i);

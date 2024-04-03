@@ -1,7 +1,5 @@
 #include "unity/unity.hpp"
 
-extern "C" IMAGE_DOS_HEADER __ImageBase;
-
 class BasePlayer : public UnityEngine::Component {
 public:
 
@@ -50,9 +48,12 @@ bool __stdcall DllMain(HINSTANCE dll, DWORD reason, void* reserved) {
                     base_player->klass->method_count,
                     base_player->klass->field_count);
 
-                auto player_model = base_player->klass->get_field_from_name("playerModel");
-                if (player_model.token != 0) {
-                    printf("%s offset: 0x%X\n", player_model.name, player_model.offset);
+                auto fields = base_player->klass->get_fields();
+                if (fields.size() > 0) {
+                    for (auto i = 0; i < fields.size(); i++) {
+                        auto field = fields.at(i);
+                        printf("%s => 0x%X\n", field.name, field.offset);
+                    }
                 }
             }
         }
