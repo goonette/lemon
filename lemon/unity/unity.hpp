@@ -52,9 +52,7 @@ namespace UnityEngine {
 
     class Component : public Object {
     public:
-        il2cpp::structs::Component* get_scripting_component() {
-            return reinterpret_cast<il2cpp::structs::Component*>(m_cachedPtr);
-        }
+        il2cpp::structs::Component* get_scripting_component() { return reinterpret_cast<il2cpp::structs::Component*>(m_cachedPtr); }
     };
 
     class GameObject : public Object {
@@ -67,8 +65,6 @@ namespace UnityEngine {
             return find(name);
         }
 
-        il2cpp::structs::GameObject* get_scripting_game_object() {
-            return reinterpret_cast<il2cpp::structs::GameObject*>(m_cachedPtr);
-        }
+        il2cpp::structs::GameObject* get_scripting_game_object() { return reinterpret_cast<il2cpp::structs::GameObject*>(m_cachedPtr); }
     };
 }    // namespace UnityEngine

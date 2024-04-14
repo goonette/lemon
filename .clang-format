@@ -2,7 +2,7 @@ Language: Cpp
 # BasedOnStyle: Maven
 Standard: Latest
 
-ColumnLimit: 120
+ColumnLimit: 140
 IndentWidth: 4
 UseTab: Never
 

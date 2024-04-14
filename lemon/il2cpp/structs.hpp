@@ -19,22 +19,22 @@ namespace il2cpp::structs {
         IL2CPP_TYPE_R4 = 0x0c,
         IL2CPP_TYPE_R8 = 0x0d,
         IL2CPP_TYPE_STRING = 0x0e,
-        IL2CPP_TYPE_PTR = 0x0f,       /* arg: <type> token */
-        IL2CPP_TYPE_BYREF = 0x10,     /* arg: <type> token */
-        IL2CPP_TYPE_VALUETYPE = 0x11, /* arg: <type> token */
-        IL2CPP_TYPE_CLASS = 0x12,     /* arg: <type> token */
-        IL2CPP_TYPE_VAR = 0x13,   /* Generic parameter in a generic type definition, represented as number (compressed
-                                     unsigned integer) number */
-        IL2CPP_TYPE_ARRAY = 0x14, /* type, rank, boundsCount, bound1, loCount, lo1 */
+        IL2CPP_TYPE_PTR = 0x0f,         /* arg: <type> token */
+        IL2CPP_TYPE_BYREF = 0x10,       /* arg: <type> token */
+        IL2CPP_TYPE_VALUETYPE = 0x11,   /* arg: <type> token */
+        IL2CPP_TYPE_CLASS = 0x12,       /* arg: <type> token */
+        IL2CPP_TYPE_VAR = 0x13,         /* Generic parameter in a generic type definition, represented as number (compressed
+                                           unsigned integer) number */
+        IL2CPP_TYPE_ARRAY = 0x14,       /* type, rank, boundsCount, bound1, loCount, lo1 */
         IL2CPP_TYPE_GENERICINST = 0x15, /* <type> <type-arg-count> <type-1> \x{2026} <type-n> */
         IL2CPP_TYPE_TYPEDBYREF = 0x16,
         IL2CPP_TYPE_I = 0x18,
         IL2CPP_TYPE_U = 0x19,
         IL2CPP_TYPE_FNPTR = 0x1b, /* arg: full method signature */
         IL2CPP_TYPE_OBJECT = 0x1c,
-        IL2CPP_TYPE_SZARRAY = 0x1d, /* 0-based one-dim-array */
-        IL2CPP_TYPE_MVAR = 0x1e, /* Generic parameter in a generic method definition, represented as number (compressed
-                                    unsigned integer)  */
+        IL2CPP_TYPE_SZARRAY = 0x1d,   /* 0-based one-dim-array */
+        IL2CPP_TYPE_MVAR = 0x1e,      /* Generic parameter in a generic method definition, represented as number (compressed
+                                         unsigned integer)  */
         IL2CPP_TYPE_CMOD_REQD = 0x1f, /* arg: typedef or typeref token */
         IL2CPP_TYPE_CMOD_OPT = 0x20,  /* optional arg: typedef or typref token */
         IL2CPP_TYPE_INTERNAL = 0x21,  /* CLR internal type */
@@ -57,6 +57,8 @@ namespace il2cpp::structs {
     struct Type;
 
     struct MethodInfo;
+
+    struct GenericClass;
 
     struct Object {
         union {
@@ -153,9 +155,119 @@ namespace il2cpp::structs {
 
         static Domain* get() {
             auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-            return *reinterpret_cast<Domain**>(module_base + 0x3B83A88);    // S_domain
+            return *reinterpret_cast<Domain**>(module_base + 0x3C4E848);    // S_domain
         }
     };
+
+    struct TypeDefinition;
+
+    struct FieldDefinition {
+        int32_t nameIndex;
+        int32_t typeIndex;
+        uint32_t token;
+    };
+
+    struct GlobalMetadata {
+        static void* get() {
+            auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
+            return *reinterpret_cast<void**>(module_base + 0x3C4E948);    // s_GlobalMetadata
+        }
+    };
+
+#pragma pack(push, p1, 4)
+    struct GlobalMetadataHeader {
+        int32_t sanity;
+        int32_t version;
+        int32_t stringLiteralOffset;    // string data for managed code
+        int32_t stringLiteralSize;
+        int32_t stringLiteralDataOffset;
+        int32_t stringLiteralDataSize;
+        int32_t stringOffset;    // string data for metadata
+        int32_t stringSize;
+        int32_t eventsOffset;    // Il2CppEventDefinition
+        int32_t eventsSize;
+        int32_t propertiesOffset;    // Il2CppPropertyDefinition
+        int32_t propertiesSize;
+        int32_t methodsOffset;    // Il2CppMethodDefinition
+        int32_t methodsSize;
+        int32_t parameterDefaultValuesOffset;    // Il2CppParameterDefaultValue
+        int32_t parameterDefaultValuesSize;
+        int32_t fieldDefaultValuesOffset;    // Il2CppFieldDefaultValue
+        int32_t fieldDefaultValuesSize;
+        int32_t fieldAndParameterDefaultValueDataOffset;    // uint8_t
+        int32_t fieldAndParameterDefaultValueDataSize;
+        int32_t fieldMarshaledSizesOffset;    // Il2CppFieldMarshaledSize
+        int32_t fieldMarshaledSizesSize;
+        int32_t parametersOffset;    // Il2CppParameterDefinition
+        int32_t parametersSize;
+        int32_t fieldsOffset;    // Il2CppFieldDefinition
+        int32_t fieldsSize;
+        int32_t genericParametersOffset;    // Il2CppGenericParameter
+        int32_t genericParametersSize;
+        int32_t genericParameterConstraintsOffset;    // TypeIndex
+        int32_t genericParameterConstraintsSize;
+        int32_t genericContainersOffset;    // Il2CppGenericContainer
+        int32_t genericContainersSize;
+        int32_t nestedTypesOffset;    // TypeDefinitionIndex
+        int32_t nestedTypesSize;
+        int32_t interfacesOffset;    // TypeIndex
+        int32_t interfacesSize;
+        int32_t vtableMethodsOffset;    // EncodedMethodIndex
+        int32_t vtableMethodsSize;
+        int32_t interfaceOffsetsOffset;    // Il2CppInterfaceOffsetPair
+        int32_t interfaceOffsetsSize;
+        int32_t typeDefinitionsOffset;    // Il2CppTypeDefinition
+        int32_t typeDefinitionsSize;
+        int32_t imagesOffset;    // Il2CppImageDefinition
+        int32_t imagesSize;
+        int32_t assembliesOffset;    // Il2CppAssemblyDefinition
+        int32_t assembliesSize;
+        int32_t fieldRefsOffset;    // Il2CppFieldRef
+        int32_t fieldRefsSize;
+        int32_t referencedAssembliesOffset;    // int32_t
+        int32_t referencedAssembliesSize;
+        int32_t attributeDataOffset;
+        int32_t attributeDataSize;
+        int32_t attributeDataRangeOffset;
+        int32_t attributeDataRangeSize;
+        int32_t unresolvedVirtualCallParameterTypesOffset;    // TypeIndex
+        int32_t unresolvedVirtualCallParameterTypesSize;
+        int32_t unresolvedVirtualCallParameterRangesOffset;    // Il2CppMetadataRange
+        int32_t unresolvedVirtualCallParameterRangesSize;
+        int32_t windowsRuntimeTypeNamesOffset;    // Il2CppWindowsRuntimeTypeNamePair
+        int32_t windowsRuntimeTypeNamesSize;
+        int32_t windowsRuntimeStringsOffset;    // const char*
+        int32_t windowsRuntimeStringsSize;
+        int32_t exportedTypeDefinitionsOffset;    // TypeDefinitionIndex
+        int32_t exportedTypeDefinitionsSize;
+
+        static GlobalMetadataHeader* get() {
+            auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
+            return *reinterpret_cast<GlobalMetadataHeader**>(module_base + 0x3C4EA30);    // s_GlobalMetadataHeader
+        }
+
+        int32_t GetIndexForTypeDefinition(const Class* klass);
+
+        template<typename T>
+        T MetadataOffset(const void* metadata, size_t sectionOffset, size_t itemIndex) {
+            return reinterpret_cast<T>(reinterpret_cast<uint8_t*>(const_cast<void*>(metadata)) + sectionOffset) + itemIndex;
+        }
+
+        const char* GetStringFromIndex(int32_t index) {
+            if (index > this->stringSize)
+                return {};
+
+            return MetadataOffset<const char*>(GlobalMetadata::get(), this->stringOffset, index);
+        }
+
+        const FieldDefinition* GetFieldDefinitionFromIndex(int32_t index) {
+            if (index > this->fieldsSize)
+                return {};
+
+            return MetadataOffset<FieldDefinition*>(GlobalMetadata::get(), this->fieldsOffset, index);
+        }
+    };
+#pragma pack(pop, p1)
 
     struct TypeDefinition {
         int32_t nameIndex;
@@ -200,6 +312,13 @@ namespace il2cpp::structs {
         // size (even for explicit layouts)
         uint32_t bitfield;
         uint32_t token;
+
+        std::pair<const char*, const char*> get_full_name(GlobalMetadataHeader* metadata) {
+            auto name_space = metadata->GetStringFromIndex(this->namespaceIndex);
+            auto name = metadata->GetStringFromIndex(this->nameIndex);
+
+            return {name_space, name};
+        }
     };
 
     struct ArrayType {
@@ -225,7 +344,7 @@ namespace il2cpp::structs {
             ArrayType* array;                /* for ARRAY */
             int32_t __genericParameterIndex; /* for VAR and MVAR at startup */
             void* genericParameterHandle;    /* for VAR and MVAR at runtime */
-            void* generic_class;             /* for GENERICINST */
+            GenericClass* generic_class;             /* for GENERICINST */
         } data;
 
         unsigned int attrs    : 16;
@@ -241,6 +360,94 @@ namespace il2cpp::structs {
             }
 
             return {};
+        }
+    };
+
+    struct GenericInst {
+        uint32_t type_argc;
+        const Type** type_argv;
+    };
+
+    struct GenericContext {
+        /* The instantiation corresponding to the class generic parameters */
+        const GenericInst* class_inst;
+        /* The instantiation corresponding to the method generic parameters */
+        const GenericInst* method_inst;
+    };
+
+    struct GenericClass {
+        const Type* type;       /* the generic type definition */
+        GenericContext context; /* a context that contains the type instantiation doesn't contain any method instantiation */
+        Class* cached_class;    /* if present, the Class corresponding to the instantiation.  */
+    };
+
+    struct GenericMethodIndices {
+        int32_t methodIndex;
+        int32_t invokerIndex;
+        int32_t adjustorThunkIndex;
+    };
+
+    struct GenericMethodFunctionsDefinitions {
+        int32_t genericMethodIndex;
+        GenericMethodIndices indices;
+    };
+
+    struct MethodSpec {
+        int32_t methodDefinitionIndex;
+        int32_t classIndexIndex;
+        int32_t methodIndexIndex;
+    };
+
+    struct TypeDefinitionSizes {
+        uint32_t instance_size;
+        int32_t native_size;
+        uint32_t static_fields_size;
+        uint32_t thread_static_fields_size;
+    };
+
+    struct MetadataRegistration {
+        int32_t genericClassesCount;
+        GenericClass* const* genericClasses;
+        int32_t genericInstsCount;
+        const GenericInst* const* genericInsts;
+        int32_t genericMethodTableCount;
+        const GenericMethodFunctionsDefinitions* genericMethodTable;
+        int32_t typesCount;
+        const Type* const* types;
+        int32_t methodSpecsCount;
+        const MethodSpec* methodSpecs;
+
+        int32_t fieldOffsetsCount;
+        const int32_t** fieldOffsets;
+
+        int32_t typeDefinitionsSizesCount;
+        const TypeDefinitionSizes** typeDefinitionsSizes;
+        const size_t metadataUsagesCount;
+        void** const* metadataUsages;
+
+        static MetadataRegistration* get() {
+            auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
+            return *reinterpret_cast<MetadataRegistration**>(module_base + 0x3C4EA48);    // s_Il2CppMetadataRegistration
+        }
+
+        const Type* GetIl2CppTypeFromIndex(int32_t index) {
+            if (index == -1)
+                return {};
+
+            if (index > this->typesCount)
+                return {};
+
+            return this->types[index];
+        }
+
+        int32_t GetFieldOffsetFromIndex(GlobalMetadataHeader* metadata, structs::Class* klass, int32_t index) {
+            uint32_t type_index = metadata->GetIndexForTypeDefinition(klass);
+            int32_t offset = this->fieldOffsets[type_index][index];
+
+            if (offset < 0)
+                return -1;
+
+            return offset;
         }
     };
 
@@ -331,7 +538,7 @@ namespace il2cpp::structs {
         Class* castClass;
         Class* declaringType;
         Class* parent;
-        void* generic_class;
+        GenericClass* generic_class;
         TypeDefinition* typeMetadataHandle;
         const void* interopData;
         Class* klass;
@@ -499,8 +706,7 @@ namespace il2cpp::structs {
 
         Class* get_class_by_name(const std::string namespace_name, const std::string class_name) const {
             auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-            auto type_info_def_table =
-                *reinterpret_cast<Class***>(module_base + 0x3B83AD8);    // s_TypeInfoDefinitionTable
+            auto type_info_def_table = *reinterpret_cast<Class***>(module_base + 0x3C4E898);    // s_TypeInfoDefinitionTable
 
             for (auto i = 0u; i < this->typeCount; i++) {
                 auto type_def_idx = this->metadataHandle->typeStart + (int)i;
@@ -526,7 +732,7 @@ namespace il2cpp::structs {
 
         static Image* get_image_by_name(std::string name) {
             auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-            auto all_assemblies = reinterpret_cast<std::vector<Assembly*>*>(module_base + 0x3B837F8);    // s_Assemblies
+            auto all_assemblies = reinterpret_cast<std::vector<Assembly*>*>(module_base + 0x3C4E5B8);    // s_Assemblies
 
             for (auto i = 0; i < all_assemblies->size(); i++) {
                 auto assembly = all_assemblies->at(i);
@@ -546,6 +752,149 @@ namespace il2cpp::structs {
             return nullptr;
         }
     };
+
+    struct Defaults {
+        Image* corlib;
+        Image* corlib_gen;
+        Class* object_class;
+        Class* byte_class;
+        Class* void_class;
+        Class* boolean_class;
+        Class* sbyte_class;
+        Class* int16_class;
+        Class* uint16_class;
+        Class* int32_class;
+        Class* uint32_class;
+        Class* int_class;
+        Class* uint_class;
+        Class* int64_class;
+        Class* uint64_class;
+        Class* single_class;
+        Class* double_class;
+        Class* char_class;
+        Class* string_class;
+        Class* enum_class;
+        Class* array_class;
+        Class* delegate_class;
+        Class* multicastdelegate_class;
+        Class* asyncresult_class;
+        Class* manualresetevent_class;
+        Class* typehandle_class;
+        Class* fieldhandle_class;
+        Class* methodhandle_class;
+        Class* systemtype_class;
+        Class* monotype_class;
+        Class* exception_class;
+        Class* threadabortexception_class;
+        Class* thread_class;
+        Class* internal_thread_class;
+        /*Class *transparent_proxy_class;
+        Class *real_proxy_class;
+        Class *mono_method_message_class;*/
+        Class* appdomain_class;
+        Class* appdomain_setup_class;
+        Class* member_info_class;
+        Class* field_info_class;
+        Class* method_info_class;
+        Class* property_info_class;
+        Class* event_info_class;
+        Class* stringbuilder_class;
+        /*Class *math_class;*/
+        Class* stack_frame_class;
+        Class* stack_trace_class;
+        Class* marshal_class;
+        /*Class *iserializeable_class;
+        Class *serializationinfo_class;
+        Class *streamingcontext_class;*/
+        Class* typed_reference_class;
+        /*Class *argumenthandle_class;*/
+        Class* marshalbyrefobject_class;
+        /*Class *monitor_class;
+        Class *iremotingtypeinfo_class;
+        Class *runtimesecurityframe_class;
+        Class *executioncontext_class;
+        Class *internals_visible_class;*/
+        Class* generic_ilist_class;
+        Class* generic_icollection_class;
+        Class* generic_ienumerable_class;
+        Class* generic_ireadonlylist_class;
+        Class* generic_ireadonlycollection_class;
+        Class* runtimetype_class;
+        Class* generic_nullable_class;
+        /*Class *variant_class;
+        Class *com_object_class;*/
+        Class* il2cpp_com_object_class;
+        /*Class *com_interop_proxy_class;
+        Class *iunknown_class;
+        Class *idispatch_class;
+        Class *safehandle_class;
+        Class *handleref_class;*/
+        Class* attribute_class;
+        Class* customattribute_data_class;
+        Class* customattribute_typed_argument_class;
+        Class* customattribute_named_argument_class;
+        // Class *critical_finalizer_object;
+        Class* version;
+        Class* culture_info;
+        Class* async_call_class;
+        Class* assembly_class;
+        Class* assembly_name_class;
+        Class* parameter_info_class;
+        Class* module_class;
+        Class* system_exception_class;
+        Class* argument_exception_class;
+        Class* wait_handle_class;
+        Class* safe_handle_class;
+        Class* sort_key_class;
+        Class* dbnull_class;
+        Class* error_wrapper_class;
+        Class* missing_class;
+        Class* value_type_class;
+
+        // Stuff used by the mono code
+        Class* threadpool_wait_callback_class;
+        MethodInfo* threadpool_perform_wait_callback_method;
+        Class* mono_method_message_class;
+
+        // Windows.Foundation.IReference`1<T>
+        Class* ireference_class;
+        // Windows.Foundation.IReferenceArray`1<T>
+        Class* ireferencearray_class;
+        // Windows.Foundation.Collections.IKeyValuePair`2<K, V>
+        Class* ikey_value_pair_class;
+        // System.Collections.Generic.KeyValuePair`2<K, V>
+        Class* key_value_pair_class;
+        // Windows.Foundation.Uri
+        Class* windows_foundation_uri_class;
+        // Windows.Foundation.IUriRuntimeClass
+        Class* windows_foundation_iuri_runtime_class_class;
+        // System.Uri
+        Class* system_uri_class;
+        // System.Guid
+        Class* system_guid_class;
+
+        Class* sbyte_shared_enum;
+        Class* int16_shared_enum;
+        Class* int32_shared_enum;
+        Class* int64_shared_enum;
+
+        Class* byte_shared_enum;
+        Class* uint16_shared_enum;
+        Class* uint32_shared_enum;
+        Class* uint64_shared_enum;
+        Class* il2cpp_fully_shared_type;
+        Class* il2cpp_fully_shared_struct_type;
+    };
+
+    int32_t GlobalMetadataHeader::GetIndexForTypeDefinition(const Class* klass) {
+        const TypeDefinition* type_def = reinterpret_cast<const TypeDefinition*>(klass->typeMetadataHandle);
+
+        const TypeDefinition* type_defs = (const TypeDefinition*)((const char*)GlobalMetadata::get() + this->typeDefinitionsOffset);
+
+        ptrdiff_t index = type_def - type_defs;
+
+        return static_cast<int32_t>(index);
+    }
 
     struct ScriptingObjectPtr {
         Object* m_Target;
