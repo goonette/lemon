@@ -1,97 +1,84 @@
-Language: Cpp
-# BasedOnStyle: Maven
-Standard: Latest
-
-ColumnLimit: 140
-IndentWidth: 4
-UseTab: Never
-
+---
+AccessModifierOffset: -4
+AlignAfterOpenBracket: DontAlign
+AlignConsecutiveMacros: Consecutive
+AlignConsecutiveAssignments: None
+AlignConsecutiveDeclarations: None
+AlignEscapedNewlines: Left
+AlignOperands: false
+AlignTrailingComments: true
+AllowAllArgumentsOnNextLine: true
+AllowAllConstructorInitializersOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortBlocksOnASingleLine: Never
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Inline
+AllowShortIfStatementsOnASingleLine: Never
+AllowShortLambdasOnASingleLine: Inline
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakAfterReturnType: None
+AlwaysBreakBeforeMultilineStrings: true
+AlwaysBreakTemplateDeclarations: 'Yes'
+BinPackArguments: true
+BinPackParameters: true
 BreakBeforeBraces: Custom
 BraceWrapping:
   AfterCaseLabel: false
   AfterClass: false
-  AfterControlStatement: Never
+  AfterControlStatement: 'false'
   AfterEnum: false
   AfterFunction: false
   AfterNamespace: false
+  AfterObjCDeclaration: true
   AfterStruct: false
   AfterUnion: false
   AfterExternBlock: false
-  BeforeCatch: false
-  BeforeElse: false
-  BeforeLambdaBody: false
-  BeforeWhile: false
+  BeforeCatch: true
+  BeforeElse: true
   IndentBraces: false
   SplitEmptyFunction: false
   SplitEmptyRecord: false
   SplitEmptyNamespace: false
-BreakBeforeBinaryOperators: None
-BreakBeforeTernaryOperators: true
-BreakBeforeConceptDeclarations: true
-BreakConstructorInitializers: BeforeComma
-BreakInheritanceList: BeforeComma
+BreakBeforeBinaryOperators: NonAssignment
+BreakBeforeTernaryOperators: false
+BreakConstructorInitializers: AfterColon
+BreakInheritanceList: AfterColon
+ColumnLimit: 120
+CompactNamespaces: true
 ConstructorInitializerAllOnOneLineOrOnePerLine: false
-ConstructorInitializerIndentWidth: 4
-ContinuationIndentWidth: 4
 Cpp11BracedListStyle: true
-
-EmptyLineBeforeAccessModifier: LogicalBlock
+DerivePointerAlignment: false
+DisableFormat: false
+EmptyLineBeforeAccessModifier: Always
+FixNamespaceComments: true
 IncludeBlocks: Preserve
-
-IndentCaseBlocks: false
-IndentCaseLabels: true
+IndentCaseLabels: false
+IndentPPDirectives: BeforeHash
 IndentWrappedFunctionNames: true
-IndentExternBlock: Indent
-IndentPPDirectives: AfterHash
-IndentRequires: true
-LambdaBodyIndentation: Signature
-MaxEmptyLinesToKeep: 1
+KeepEmptyLinesAtTheStartOfBlocks: false
+MaxEmptyLinesToKeep: 2
 NamespaceIndentation: All
-
-SpaceAfterTemplateKeyword: false
-SpaceAroundPointerQualifiers: Default
-SpaceBeforeCaseColon: false
-SpaceBeforeCpp11BracedList: false
+PenaltyIndentedWhitespace: 100
+PointerAlignment: Left
+SortIncludes: Never
+SortUsingDeclarations: true
+SpaceAfterCStyleCast: false
+SpaceAfterLogicalNot: false
+SpaceAfterTemplateKeyword: true
+SpaceBeforeAssignmentOperators: true
+SpaceBeforeCpp11BracedList: true
 SpaceBeforeCtorInitializerColon: true
 SpaceBeforeInheritanceColon: true
 SpaceBeforeParens: ControlStatements
 SpaceBeforeRangeBasedForLoopColon: true
-SpaceBeforeSquareBrackets: false
-SpaceInEmptyBlock: false
 SpaceInEmptyParentheses: false
-SpacesBeforeTrailingComments: 4
+SpacesBeforeTrailingComments: 2
+SpacesInAngles: false
 SpacesInCStyleCastParentheses: false
-SpacesInConditionalStatement: false
 SpacesInContainerLiterals: false
 SpacesInParentheses: false
 SpacesInSquareBrackets: false
-
-SortIncludes: Never
-SortUsingDeclarations: true
-
-AccessModifierOffset: -4
-PointerAlignment: Left
-AlignAfterOpenBracket: AlwaysBreak
-AlignArrayOfStructures: Left
-AlignConsecutiveAssignments: None
-AlignConsecutiveBitFields: AcrossComments
-AlignConsecutiveDeclarations: None
-AlignConsecutiveMacros: None
-AlignEscapedNewlines: Left
-AlignOperands: AlignAfterOperator
-AlignTrailingComments: true
-AllowShortBlocksOnASingleLine: Always
-AllowAllParametersOfDeclarationOnNextLine: true
-AllowShortCaseLabelsOnASingleLine: true
-AllowShortEnumsOnASingleLine: true
-AllowShortFunctionsOnASingleLine: All
-AllowShortIfStatementsOnASingleLine: Never
-AllowShortLambdasOnASingleLine: All
-AllowShortLoopsOnASingleLine: false
-AlwaysBreakTemplateDeclarations: Yes
-BinPackArguments: false
-BinPackParameters: false
-BitFieldColonSpacing: After
-
-CompactNamespaces: true
-FixNamespaceComments: true
+IndentWidth: 4
+TabWidth: 4
+UseTab: AlignWithSpaces
