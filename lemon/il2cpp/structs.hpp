@@ -748,6 +748,26 @@ namespace il2cpp::structs {
 		const Image* image;
 	};
 
+	struct CodeGenModule {
+		const char* moduleName;
+		const uint32_t methodPointerCount;
+		const MethodPointer* methodPointers;
+		const uint32_t adjustorThunkCount;
+		const void* adjustorThunks;
+		const int32_t* invokerIndices;
+		const uint32_t reversePInvokeWrapperCount;
+		const void* reversePInvokeWrapperIndices;
+		const uint32_t rgctxRangesCount;
+		const void* rgctxRanges;
+		const uint32_t rgctxsCount;
+		const void* rgctxs;
+		const void* debuggerMetadata;
+		const MethodPointer moduleInitializer;
+		int32_t* staticConstructorTypeIndices;
+		const MetadataRegistration* metadataRegistration;  // Per-assembly mode only
+		const void* codeRegistaration;                     // Per-assembly mode only
+	};
+
 	struct Image {
 		const char* name;
 		const char* nameNoExt;
@@ -761,7 +781,8 @@ namespace il2cpp::structs {
 
 		ImageGlobalMetadata* metadataHandle;
 		mutable void* nameToClassHashTable;
-		void* codeGenModule;
+		const CodeGenModule* codeGenModule;
+
 		uint32_t token;
 		uint8_t dynamic;
 

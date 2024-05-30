@@ -133,4 +133,10 @@ namespace il2cpp {
 
 		return def {};
 	}
+
+	structs::MethodPointer get_method_pointer(const structs::Image* image, uint32_t token) {
+		uint32_t row_id = token & 0x00FFFFFF;
+
+		return image->codeGenModule->methodPointers[row_id - 1];
+	}
 }  // namespace il2cpp
