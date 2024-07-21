@@ -5,7 +5,7 @@
 namespace il2cpp {
 	structs::Class* class_from_type_enum(structs::TypeEnum type) {
 		auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-		auto defaults = reinterpret_cast<structs::Defaults*>(module_base + 0x3CF25D0);  // il2cpp_defaults
+		auto defaults = reinterpret_cast<structs::Defaults*>(module_base + 0x573DD50);  // il2cpp_defaults
 
 #define RETURN_DEFAULT_TYPE(field_name) \
 	do {                                \
@@ -109,7 +109,7 @@ namespace il2cpp {
 	template <typename def>
 	static def resolve_icall(const char* name) {
 		auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-		auto map = *reinterpret_cast<ICallMap*>(module_base + 0x3CF3680);  // s_InternalCalls
+		auto map = *reinterpret_cast<ICallMap*>(module_base + 0x573E770);  // s_InternalCalls
 
 		// Try to find the whole name first, then search using just type::method if parameters were passed
 		// ex: First, System.Foo::Bar(System.Int32)

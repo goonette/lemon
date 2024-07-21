@@ -53,6 +53,14 @@ A proof of concept importless way to modify Il2Cpp Unity games.
 - ![metadata_registration](/imgs/metadata_registration.png)
 - Get the address of that static variable.
 
+### s_MethodInfoDefinitionTable
+- Open `GameAssembly.dll` in IDA.
+- Search for the string `global-metadata.dat`.
+- Open the function that contains said string.
+- Find the static variable with this math.
+- ![method_info](/imgs/method_info.png)
+- Get the address of that static variable.
+
 ### il2cpp_defaults
 - Open `GameAssembly.dll` in IDA.
 - Search for the string `__Generated`.
@@ -66,12 +74,4 @@ A proof of concept importless way to modify Il2Cpp Unity games.
 - Find the `il2cpp_resolve_icall` export.
 - Follow control flow until you find a function like this:
 - ![icalls](/imgs/icalls.png)
-- Get the address of that static variable.
-
-### s_MethodInfoDefinitionTable
-- Open `GameAssembly.dll` in IDA.
-- Search for the string `global-metadata.dat`.
-- Open the function that contains said string.
-- Find the static variable with this math.
-- ![method_info](/imgs/method_info.png)
 - Get the address of that static variable.

@@ -155,7 +155,7 @@ namespace il2cpp::structs {
 
 		static Domain* get() {
 			auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-			return *reinterpret_cast<Domain**>(module_base + 0x3CF1D60);  // S_domain
+			return *reinterpret_cast<Domain**>(module_base + 0x573EB88);  // S_domain
 		}
 	};
 
@@ -181,7 +181,7 @@ namespace il2cpp::structs {
 
 		static MethodInfo* GetMethodInfoFromMethodDefinitionIndex(int32_t index) {
 			auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-			auto ret = *reinterpret_cast<MethodInfo***>(module_base + 0x3CF1D90);  // s_MethodInfoDefinitionTable
+			auto ret = *reinterpret_cast<MethodInfo***>(module_base + 0x573EBB8);  // s_MethodInfoDefinitionTable
 			return ret[index];
 		}
 	};
@@ -195,7 +195,7 @@ namespace il2cpp::structs {
 	struct GlobalMetadata {
 		static void* get() {
 			auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-			return *reinterpret_cast<void**>(module_base + 0x3CF1FA8);  // s_GlobalMetadata
+			return *reinterpret_cast<void**>(module_base + 0x573EDC8);  // s_GlobalMetadata
 		}
 	};
 
@@ -268,7 +268,7 @@ namespace il2cpp::structs {
 
 		static GlobalMetadataHeader* get() {
 			auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-			return *reinterpret_cast<GlobalMetadataHeader**>(module_base + 0x3CF1FB0);  // s_GlobalMetadataHeader
+			return *reinterpret_cast<GlobalMetadataHeader**>(module_base + 0x573EDD0);  // s_GlobalMetadataHeader
 		}
 
 		int32_t GetIndexForTypeDefinition(const Class* klass);
@@ -468,7 +468,7 @@ namespace il2cpp::structs {
 
 		static MetadataRegistration* get() {
 			auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-			return *reinterpret_cast<MetadataRegistration**>(module_base + 0x3CF1FC0);  // s_Il2CppMetadataRegistration
+			return *reinterpret_cast<MetadataRegistration**>(module_base + 0x573EDE0);  // s_Il2CppMetadataRegistration
 		}
 
 		const Type* GetIl2CppTypeFromIndex(int32_t index) {
@@ -789,7 +789,7 @@ namespace il2cpp::structs {
 		Class* get_class_by_name(const std::string namespace_name, const std::string class_name) {
 			auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
 			auto type_info_def_table =
-				*reinterpret_cast<Class***>(module_base + 0x3CF1DA8);  // s_TypeInfoDefinitionTable
+				*reinterpret_cast<Class***>(module_base + 0x573EBD0);  // s_TypeInfoDefinitionTable
 
 			for (auto i = 0u; i < this->typeCount; i++) {
 				auto type_def_idx = this->metadataHandle->typeStart + (int)i;
@@ -815,7 +815,7 @@ namespace il2cpp::structs {
 
 		static Image* get_image_by_name(std::string name) {
 			auto module_base = reinterpret_cast<std::uintptr_t>(GetModuleHandleA("GameAssembly.dll"));
-			auto all_assemblies = reinterpret_cast<std::vector<Assembly*>*>(module_base + 0x3CF2C28);  // s_Assemblies
+			auto all_assemblies = reinterpret_cast<std::vector<Assembly*>*>(module_base + 0x573E650);  // s_Assemblies
 
 			for (auto i = 0; i < all_assemblies->size(); i++) {
 				auto assembly = all_assemblies->at(i);
